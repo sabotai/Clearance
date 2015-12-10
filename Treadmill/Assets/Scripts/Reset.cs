@@ -26,6 +26,12 @@ public class Reset : MonoBehaviour {
 		if (!pipeOVER) {
 			pipeEntry ();
 		}
+
+
+		if (Input.GetKeyDown (KeyCode.R)) {
+
+			Application.LoadLevel (Application.loadedLevelName);
+		}
 	}
 
 	void pipeEntry(){

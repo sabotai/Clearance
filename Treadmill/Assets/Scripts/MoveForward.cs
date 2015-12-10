@@ -8,6 +8,9 @@ public class MoveForward : MonoBehaviour {
 	public static float antForceDiv;
 	public bool beginPush = false;
 	private bool leftFoot = true; //use a boolean to alternate between the required keystrokes
+	public AudioSource audioContainer;
+	public AudioClip leftStep;
+	public AudioClip rightStep;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +30,15 @@ public class MoveForward : MonoBehaviour {
 		if (Input.GetKeyDown(whichFoot)) {
 			locRig.AddForce (Vector2.right * stepSize);
 			leftFoot = !leftFoot;
+
+			audioContainer.Stop ();
+			if (leftFoot) {
+				audioContainer.PlayOneShot (leftStep, 0.2f);
+			} else {
+				
+				audioContainer.PlayOneShot (rightStep, 0.2f);
+			}
+
 		}
 
 		if (beginPush) {
