@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BladeSpin : MonoBehaviour {
 
-	public float spinSpeed = 1;
+	public float spinSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +12,9 @@ public class BladeSpin : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate (new Vector3(0, 0, -1) * spinSpeed);
+		float currentSpeed = Mathf.LerpAngle (0, spinSpeed, Time.time/6);
+		//Debug.Log ("currentSpeed = " + currentSpeed);
+		transform.Rotate (new Vector3(0, 0, currentSpeed));
 	
 	}
 }
