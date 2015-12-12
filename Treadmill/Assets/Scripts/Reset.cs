@@ -39,7 +39,7 @@ public class Reset : MonoBehaviour {
 		float pipePct = Mathf.Clamp (Mathf.Sin (Time.time), -0.5f, 0) * -2;
 
 
-		Debug.Log ("moving pipe by " + pipePct);
+		//Debug.Log ("moving pipe by " + pipePct);
 
 		if (pipePct <= 0.99f) { //stop when 99% of journey crossed
 			if (pipePresent) {
@@ -77,6 +77,8 @@ public class Reset : MonoBehaviour {
 				other.gameObject.GetComponent<ParticleSystem> ().Play ();
 				MoveForward.antForceDiv /= 2;
 				StartCoroutine (CameraShake.Shake (0.2f, 0.1f));
+
+				CurrencyGen.score = 0;
 			}
 			break;
 				
