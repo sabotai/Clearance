@@ -8,9 +8,10 @@ public class MoveForward : MonoBehaviour {
 	public static float antForceDiv;
 	public static bool beginPush = false;
 	private bool leftFoot = true; //use a boolean to alternate between the required keystrokes
-	public AudioSource audioContainer;
+	public AudioSource audioContainer, audioContainer2;
 	public AudioClip leftStep;
 	public AudioClip rightStep;
+	public AudioClip getItem;
 
 	// Use this for initialization
 	void Start () {
@@ -36,10 +37,10 @@ public class MoveForward : MonoBehaviour {
 
 			audioContainer.Stop ();
 			if (leftFoot) {
-				audioContainer.PlayOneShot (leftStep, 0.2f);
+				audioContainer.PlayOneShot (leftStep, 0.8f);
 			} else {
 				
-				audioContainer.PlayOneShot (rightStep, 0.2f);
+				audioContainer.PlayOneShot (rightStep, 0.8f);
 			}
 
 		}
@@ -54,9 +55,10 @@ public class MoveForward : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D myTrig){
+	void OnTriggerStay2D(Collider2D myTrig){
 		Debug.Log ("triggered");
 		if (myTrig.gameObject.tag == "item") {
+			audioContainer2.PlayOneShot (getItem, 1f);
 			CurrencyGen.score++;
 			Destroy (myTrig.gameObject);
 		}

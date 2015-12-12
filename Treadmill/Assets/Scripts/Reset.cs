@@ -36,7 +36,7 @@ public class Reset : MonoBehaviour {
 
 	void pipeEntry(){
 
-		float pipePct = Mathf.Clamp (Mathf.Sin (Time.time), -0.5f, 0) * -2;
+		float pipePct = Mathf.Clamp (Mathf.Sin (Time.timeSinceLevelLoad), -0.5f, 0) * -2;
 
 
 		//Debug.Log ("moving pipe by " + pipePct);
@@ -69,9 +69,10 @@ public class Reset : MonoBehaviour {
 				Application.LoadLevel (Application.loadedLevelName);
 				break;
 			case "SliceSound":
+			if (!other.gameObject.GetComponent<AudioSource> ().isPlaying)
 				other.gameObject.GetComponent<AudioSource> ().Play ();
 			break;
-		case "Blade":
+			case "Blade":
 
 			if (!other.gameObject.GetComponent<ParticleSystem> ().isPlaying) {
 				other.gameObject.GetComponent<ParticleSystem> ().Play ();
