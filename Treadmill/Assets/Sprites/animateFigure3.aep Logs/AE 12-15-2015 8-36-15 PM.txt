@@ -1,0 +1,12 @@
+Adobe After Effects v13.6 Windows 64 render log for project “animateFigure3.aep”
+
+Rendering started on 12/15/2015 at 8:36:15 PM
+
+  12/15/2015 8:36:15 PM: Starting composition “run 3”.
+
+  Output To: F:\UnityProjects\Clearance\Treadmill\Assets\Sprites\sliced\sliced_[#####].png    12/15/2015 8:36:16 PM: Finished composition “run 3”.
+
+
+  Total Time Elapsed: 1 Seconds
+Log closed on 12/15/2015 at 8:36:16 PM
+

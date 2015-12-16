@@ -8,6 +8,7 @@ public class Reset : MonoBehaviour {
 	GameObject pipe;
 	bool pipePresent = true;
 	bool pipeOVER = false;
+	Animator charAnim;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,8 @@ public class Reset : MonoBehaviour {
 		} else if (pipe.transform.position == pipePos1) {
 			pipePresent = false;
 		}
+
+		charAnim = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -73,14 +76,18 @@ public class Reset : MonoBehaviour {
 				other.gameObject.GetComponent<AudioSource> ().Play ();
 			break;
 			case "Blade":
-
 			if (!other.gameObject.GetComponent<ParticleSystem> ().isPlaying) {
+
 				other.gameObject.GetComponent<ParticleSystem> ().Play ();
 				MoveForward.antForceDiv /= 2;
 				StartCoroutine (CameraShake.Shake (0.2f, 0.1f));
 
 				CurrencyGen.score = 0;
 			}
+			break;
+		case "sliced":
+			Debug.Log ("sliced");
+			charAnim.SetInteger ("state", 9);
 			break;
 				
 		}

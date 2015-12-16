@@ -1,0 +1,12 @@
+Adobe After Effects v13.6 Windows 64 render log for project “animateFigure.aep”
+
+Rendering started on 12/15/2015 at 5:56:56 PM
+
+  12/15/2015 5:56:56 PM: Starting composition “run”.
+
+  Output To: F:\UnityProjects\Clearance\Treadmill\Assets\Sprites\run_[#####].png  After Effects warning: Undo group mismatch, will attempt to fix.  12/15/2015 5:56:56 PM: Finished composition “run”.
+
+
+  Total Time Elapsed: 0 Seconds
+Log closed on 12/15/2015 at 5:56:56 PM
+

@@ -1,0 +1,12 @@
+Adobe After Effects v13.6 Windows 64 render log for project “animateFigure.aep”
+
+Rendering started on 12/15/2015 at 6:04:24 PM
+
+  12/15/2015 6:04:24 PM: Starting composition “run”.
+
+  Output To: F:\UnityProjects\Clearance\Treadmill\Assets\Sprites\run\run_[#####].png    12/15/2015 6:04:25 PM: Finished composition “run”.
+
+
+  Total Time Elapsed: 1 Seconds
+Log closed on 12/15/2015 at 6:04:25 PM
+

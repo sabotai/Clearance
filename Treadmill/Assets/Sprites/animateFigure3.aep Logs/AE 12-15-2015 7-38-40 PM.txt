@@ -1,0 +1,12 @@
+Adobe After Effects v13.6 Windows 64 render log for project “animateFigure3.aep”
+
+Rendering started on 12/15/2015 at 7:38:40 PM
+
+  12/15/2015 7:38:40 PM: Starting composition “run 2”.
+
+  Output To: F:\UnityProjects\Clearance\Treadmill\Assets\Sprites\run-stand\run-stand_[#####].png    12/15/2015 7:38:40 PM: Finished composition “run 2”.
+
+
+  Total Time Elapsed: 0 Seconds
+Log closed on 12/15/2015 at 7:38:41 PM
+
