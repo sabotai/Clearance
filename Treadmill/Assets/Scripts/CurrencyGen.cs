@@ -21,7 +21,7 @@ public class CurrencyGen : MonoBehaviour {
 		nextSpawn = spawnRate;
 
 		if (textObj == null) {
-			Debug.Log ("manually assigning");
+			//Debug.Log ("manually assigning");
 			textObj = GameObject.Find ("Text");
 			originalScale = textObj.GetComponent<RectTransform> ().localScale;
 		}

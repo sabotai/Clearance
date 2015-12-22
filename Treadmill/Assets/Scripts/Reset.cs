@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Reset : MonoBehaviour {
 
@@ -31,9 +32,10 @@ public class Reset : MonoBehaviour {
 		}
 
 
-		if (Input.GetKeyDown (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.Space)) {
 
-			Application.LoadLevel (Application.loadedLevelName);
+			SceneManager.LoadScene (0);
+			//Application.LoadLevel (Application.loadedLevelName);
 		}
 	}
 
@@ -49,46 +51,50 @@ public class Reset : MonoBehaviour {
 				pipe.transform.position = Vector3.Lerp (pipePos2, pipePos1, pipePct);
 			} else if (1 - pipePct < 0.99f) {
 				pipe.transform.position = Vector3.Lerp (pipePos1, pipePos2, 1 - pipePct);
-				Debug.Log ("removing pipe");
+				//Debug.Log ("removing pipe");
 			} else {
 				pipeOVER = true;
-				Debug.Log ("pipe stuff is OVER");
+				//Debug.Log ("pipe stuff is OVER");
 			}
 		} else {
 			pipePresent = false;
-			if (GetComponent<Rigidbody2D> ().isKinematic)
+			if (GetComponent<Rigidbody2D> ().isKinematic) {
 				pipe.GetComponent<AudioSource> ().Play ();
+			}
 			GetComponent<Rigidbody2D> ().isKinematic = false;
 		}
 
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log (other.name + " triggered");
+		//Debug.Log (other.name + " triggered");
 
 		switch (other.name){
-			case "box":
-				if (reset)
-				Application.LoadLevel (Application.loadedLevelName);
-				break;
-			case "SliceSound":
-			if (!other.gameObject.GetComponent<AudioSource> ().isPlaying)
-				other.gameObject.GetComponent<AudioSource> ().Play ();
-			break;
-			case "Blade":
-			if (!other.gameObject.GetComponent<ParticleSystem> ().isPlaying) {
-
-				other.gameObject.GetComponent<ParticleSystem> ().Play ();
-				MoveForward.antForceDiv /= 2;
-				StartCoroutine (CameraShake.Shake (0.2f, 0.1f));
-
-				CurrencyGen.score = 0;
+		case "box":
+			if (reset) {
+				SceneManager.LoadScene (0);
+				//Application.LoadLevel (Application.loadedLevelName);
 			}
-			break;
-		case "sliced":
-			Debug.Log ("sliced");
-			charAnim.SetInteger ("state", 9);
-			break;
+					break;
+		case "SliceSound":
+			if (!other.gameObject.GetComponent<AudioSource> ().isPlaying) {
+				other.gameObject.GetComponent<AudioSource> ().Play ();
+			}
+				break;
+			case "Blade":
+				if (!other.gameObject.GetComponent<ParticleSystem> ().isPlaying) {
+
+					other.gameObject.GetComponent<ParticleSystem> ().Play ();
+					MoveForward.antForceDiv /= 2;
+					StartCoroutine (CameraShake.Shake (0.2f, 0.1f));
+
+					CurrencyGen.score = 0;
+				}
+				break;
+			case "sliced":
+				//Debug.Log ("sliced");
+				charAnim.SetInteger ("state", 9);
+				break;
 				
 		}
 	}

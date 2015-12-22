@@ -14,12 +14,17 @@ public class MoveForward : MonoBehaviour {
 	public AudioClip rightStep;
 	public AudioClip getItem;
 
+	public Animation runAnim;
+
 	int stepCountAnim =0;
 	public int stepAnimThresh = 15;
 
 	public Transform blade;
 
 	Animator charAnim;
+
+
+	public Material controlMat;
 
 	// Use this for initialization
 	void Start () {
@@ -34,18 +39,23 @@ public class MoveForward : MonoBehaviour {
 		charAnim = GetComponent<Animator> ();
 
 		stepCountAnim = stepAnimThresh;
+
+		controlMat.color = new Color (1, 1, 1, 0);
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
-	if (beginPush) {
-		KeyCode whichFoot;
-		if (leftFoot){
-			whichFoot = KeyCode.S;
-		} else {
-			whichFoot = KeyCode.D;
-		}
+		if (beginPush) {
+			if (controlMat.color.a > 0)
+				controlMat.color -= new Color (0, 0, 0, .05f);
+
+			KeyCode whichFoot;
+			if (leftFoot) {
+				whichFoot = KeyCode.S;
+			} else {
+				whichFoot = KeyCode.D;
+			}
 
 			if (Input.GetKeyDown (whichFoot)) {
 				//charAnim.SetInteger ("state", 1);
@@ -56,9 +66,11 @@ public class MoveForward : MonoBehaviour {
 
 				audioContainer.Stop ();
 				if (leftFoot) {
+					audioContainer.pitch = 0.8f;
 					audioContainer.PlayOneShot (leftStep, 0.8f);
 				} else {
-				
+
+					audioContainer.pitch = 2f;
 					audioContainer.PlayOneShot (rightStep, 0.8f);
 				}
 
@@ -68,29 +80,50 @@ public class MoveForward : MonoBehaviour {
 
 			locRig.AddForce (Vector2.left * stepSize / antForceDiv);
 
-			if (charAnim.GetInteger("state") != 9) {
-				if ((stepCountAnim > stepAnimThresh) && (Vector3.Distance (transform.position, blade.position) > 4.5)) { //make the figure run when near the blade
+
+			// animate the running to the same speed as the positive x velocity
+			float calcVel = 1 + (locRig.velocity.x-0)*(1.5f - 1)/(4-1); //map range
+
+			if (calcVel > 1) {
+				charAnim.speed = calcVel;
+				Debug.Log ("rigidbody vel = " + charAnim.speed);
+			} else {
+				charAnim.speed = 1;
+			}
+
+
+			if (charAnim.GetInteger ("state") != 9) { //if not falling
+				if ((stepCountAnim > stepAnimThresh) && (Vector3.Distance (transform.position, blade.position) > 4.5f)) { //make the figure run when near the blade
 
 					charAnim.SetInteger ("state", 0);
 
+					charAnim.speed =1;
+					//Debug.Log ("anim speed = RESET");
+
+
 				} else {
+
 					charAnim.SetInteger ("state", 1);
 				}
 			}
 
+		} else {
+			if (controlMat.color.a < 1) {
+				controlMat.color += new Color (0, 0, 0, .05f);
+			}
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D myCol){
 		if (!beginPush) {
 			beginPush = true;
-			Debug.Log ("FIRST COLLISION");
+			//Debug.Log ("FIRST COLLISION");
 			charAnim.SetInteger ("state", 0);
 		}
 	}
 
 	void OnTriggerStay2D(Collider2D myTrig){
-		Debug.Log ("triggered");
+		//Debug.Log ("triggered");
 		if (myTrig.gameObject.tag == "item") {
 			audioContainer2.PlayOneShot (getItem, 1f);
 			CurrencyGen.score++;

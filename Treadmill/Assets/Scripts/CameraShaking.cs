@@ -4,7 +4,7 @@ using System.Collections;
 public class CameraShake : MonoBehaviour {
 
 	public static IEnumerator Shake(float duration, float magnitude) {
-		Debug.Log ("shaking...");
+		//Debug.Log ("shaking...");
 
 
 		float elapsed = 0.0f;
