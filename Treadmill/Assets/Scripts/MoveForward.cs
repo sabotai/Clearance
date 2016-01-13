@@ -24,7 +24,7 @@ public class MoveForward : MonoBehaviour {
 	Animator charAnim;
 
 
-	public Material controlMat;
+	public Material controlMat, controlMat2;
 
 	// Use this for initialization
 	void Start () {
@@ -41,14 +41,17 @@ public class MoveForward : MonoBehaviour {
 		stepCountAnim = stepAnimThresh;
 
 		controlMat.color = new Color (1, 1, 1, 0);
+		controlMat2.color = new Color (1, 1, 1, 1);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		if (beginPush) {
-			if (controlMat.color.a > 0)
+			if (controlMat.color.a > 0 || controlMat2.color.a > 0) {
 				controlMat.color -= new Color (0, 0, 0, .05f);
+				controlMat2.color -= new Color (0, 0, 0, .08f);
+			}
 
 			KeyCode whichFoot;
 			if (leftFoot) {
@@ -86,7 +89,7 @@ public class MoveForward : MonoBehaviour {
 
 			if (calcVel > 1) {
 				charAnim.speed = calcVel;
-				Debug.Log ("rigidbody vel = " + charAnim.speed);
+				//Debug.Log ("rigidbody vel = " + charAnim.speed);
 			} else {
 				charAnim.speed = 1;
 			}

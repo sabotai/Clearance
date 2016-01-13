@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class CurrencyGen : MonoBehaviour {
 
-	public GameObject itemPrefab;
+	public GameObject itemPrefab, itemPrefab2, currentItem;
 	public Transform spawnPt;
 	public int spawnRate = 5;
 	private float nextSpawn;
 
+	private bool coin = false;
 	public static int score = 0;
 
 	GameObject textObj;
@@ -29,6 +30,8 @@ public class CurrencyGen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
 		int oldScore = int.Parse(textObj.GetComponent<Text> ().text);
 
 		if (oldScore != score) {
@@ -48,7 +51,21 @@ public class CurrencyGen : MonoBehaviour {
 			nextSpawn = Time.time + spawnRate;
 
 			if (MoveForward.beginPush) {
-				GameObject clone = Instantiate (itemPrefab, spawnPt.position, Quaternion.identity) as GameObject;
+
+				Debug.Log ("next spawn = " + nextSpawn);
+				if (coin) {
+					currentItem = itemPrefab;
+					Debug.Log ("current - 1");
+
+				} else {
+					currentItem = itemPrefab2;
+					Debug.Log ("current - 2");
+				}
+				coin = !coin;
+
+					GameObject clone = Instantiate (currentItem, spawnPt.position, Quaternion.identity) as GameObject;
+					Debug.Log ("make money");
+
 			}
 
 
