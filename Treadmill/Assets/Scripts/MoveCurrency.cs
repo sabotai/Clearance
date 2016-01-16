@@ -11,7 +11,7 @@ public class MoveCurrency : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float newX =transform.position.x - (Time.deltaTime * speed);
+		float newX = transform.position.x - (Time.deltaTime * speed);
 		transform.position = new Vector3(newX, transform.position.y, transform.position.z) ;
 	}
 

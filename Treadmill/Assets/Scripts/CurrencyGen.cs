@@ -11,6 +11,7 @@ public class CurrencyGen : MonoBehaviour {
 
 	private bool coin = false;
 	public static int score = 0;
+	public static int prevScore;
 
 	GameObject textObj;
 	private Vector3 originalScale;
@@ -26,6 +27,7 @@ public class CurrencyGen : MonoBehaviour {
 			textObj = GameObject.Find ("Text");
 			originalScale = textObj.GetComponent<RectTransform> ().localScale;
 		}
+
 	}
 	
 	// Update is called once per frame
