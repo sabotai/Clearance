@@ -16,8 +16,8 @@ public class ShowTrueScore : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.Tab)) {
-			high2.GetComponent<Text> ().text = "(" + PlayerPrefs.GetInt ("realHighScore") + ")";
-			high.GetComponent<Text> ().text = "(" + CurrencyGen.prevScore + ")";
+			high2.GetComponent<Text> ().text = PlayerPrefs.GetInt ("realHighScore").ToString();
+			high.GetComponent<Text> ().text = CurrencyGen.prevScore.ToString();
 		} else {
 			high2.GetComponent<Text> ().text = "0";
 			high.GetComponent<Text> ().text = "0";

@@ -43,7 +43,7 @@ public class MoveForward : MonoBehaviour {
 		stepCountAnim = stepAnimThresh;
 
 		controlMat.color = new Color (1, 1, 1, 0);
-		controlMat2.color = new Color (1, 1, 1, 1);
+		controlMat2.color = new Color (1, 1, 1, 0);
 
 		highScore = GameObject.Find ("Text-hs");
 		highScore2 = GameObject.Find ("Text-hs2");
@@ -68,7 +68,7 @@ public class MoveForward : MonoBehaviour {
 		float tempPct = Mathf.Clamp (Mathf.Sin (Time.timeSinceLevelLoad), -0.5f, 0) * -2;
 		if (tempPct > 0.5f){
 			if (controlMat2.color.a > 0){
-				controlMat2.color -= new Color (0, 0, 0, .08f);
+				controlMat2.color -= new Color (0, 0, 0, .03f);
 
 
 				if (Reset.resetCount > 0) {
@@ -146,6 +146,16 @@ public class MoveForward : MonoBehaviour {
 		} else {
 			if (controlMat.color.a < 1) {
 				controlMat.color += new Color (0, 0, 0, .05f);
+
+
+				controlMat2.color += new Color (0, 0, 0, .05f);
+
+				if (Reset.resetCount > 0) {
+					highScore.GetComponent<Text> ().color = controlMat.color;
+					highScore2.GetComponent<Text> ().color = controlMat.color;
+					hs.GetComponent<Text> ().color = new Color (hs.GetComponent<Text> ().color.r, hs.GetComponent<Text> ().color.g, hs.GetComponent<Text> ().color.b, controlMat.color.a);
+					hs2.GetComponent<Text> ().color = new Color (hs2.GetComponent<Text> ().color.r, hs2.GetComponent<Text> ().color.g, hs2.GetComponent<Text> ().color.b, controlMat.color.a);
+				}
 			}
 		}
 	}
@@ -163,6 +173,7 @@ public class MoveForward : MonoBehaviour {
 		if (myTrig.gameObject.tag == "item") {
 			audioContainer2.PlayOneShot (getItem, 1f);
 			CurrencyGen.score++;
+			Reset.resetCount = 0;
 
 			if (CurrencyGen.score > PlayerPrefs.GetInt("realHighScore")) {
 				PlayerPrefs.SetInt ("realHighScore", CurrencyGen.score);

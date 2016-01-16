@@ -31,7 +31,7 @@ public class Reset : MonoBehaviour {
 
 
 		if (resetCount > 3) {
-			instructions.transform.position = new Vector3 (4.85f, -4.75f, 0);
+			instructions.transform.position = new Vector3 (4.85f, -4.85f, 0);
 		}
 		if (resetCount > 1) {
 			instructions.SetActive(true);
