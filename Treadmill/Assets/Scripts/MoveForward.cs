@@ -23,6 +23,7 @@ public class MoveForward : MonoBehaviour {
 	public Transform blade;
 
 	Animator charAnim;
+	public float animSpeedMultiplier = 1.5f;
 
 	GameObject highScore, highScore2, hs, hs2;
 
@@ -45,6 +46,7 @@ public class MoveForward : MonoBehaviour {
 		controlMat.color = new Color (1, 1, 1, 0);
 		controlMat2.color = new Color (1, 1, 1, 0);
 
+
 		highScore = GameObject.Find ("Text-hs");
 		highScore2 = GameObject.Find ("Text-hs2");
 
@@ -53,10 +55,18 @@ public class MoveForward : MonoBehaviour {
 		hs2 = GameObject.Find ("Text-hs2 (1)");
 
 		if (Reset.resetCount > 0) {
+			GameObject.Find ("credit").GetComponent<Text> ().color = new Color (0, 0, 0, 0);
+			GameObject.Find ("credit2").GetComponent<Text> ().color = new Color (0, 0, 0, 0);
+
 			highScore.GetComponent<Text> ().color = controlMat2.color;
 			highScore2.GetComponent<Text> ().color = controlMat2.color;
-			hs.GetComponent<Text> ().color =  new Color(hs.GetComponent<Text>().color.r, hs.GetComponent<Text>().color.g, hs.GetComponent<Text>().color.b, controlMat2.color.a);;
-			hs2.GetComponent<Text> ().color =  new Color(hs2.GetComponent<Text>().color.r, hs2.GetComponent<Text>().color.g, hs2.GetComponent<Text>().color.b, controlMat2.color.a);
+			hs.GetComponent<Text> ().color = new Color (hs.GetComponent<Text> ().color.r, hs.GetComponent<Text> ().color.g, hs.GetComponent<Text> ().color.b, controlMat2.color.a);
+			;
+			hs2.GetComponent<Text> ().color = new Color (hs2.GetComponent<Text> ().color.r, hs2.GetComponent<Text> ().color.g, hs2.GetComponent<Text> ().color.b, controlMat2.color.a);
+		} else {
+			//swap out the high score object on the first run to show the creator credit
+			highScore = GameObject.Find ("credit");
+			hs = GameObject.Find ("credit2");
 		}
 		Debug.Log ("high score = " + PlayerPrefs.GetInt ("realHighScore"));
 	}
@@ -71,10 +81,11 @@ public class MoveForward : MonoBehaviour {
 				controlMat2.color -= new Color (0, 0, 0, .03f);
 
 
+				highScore.GetComponent<Text> ().color = controlMat2.color;
+				hs.GetComponent<Text> ().color = new Color(hs.GetComponent<Text>().color.r, hs.GetComponent<Text>().color.g, hs.GetComponent<Text>().color.b, controlMat2.color.a);
+
 				if (Reset.resetCount > 0) {
-					highScore.GetComponent<Text> ().color = controlMat2.color;
-					highScore2.GetComponent<Text> ().color = controlMat2.color;
-					hs.GetComponent<Text> ().color = new Color(hs.GetComponent<Text>().color.r, hs.GetComponent<Text>().color.g, hs.GetComponent<Text>().color.b, controlMat2.color.a);
+					highScore2.GetComponent<Text> ().color = controlMat2.color;	
 					hs2.GetComponent<Text> ().color = new Color(hs2.GetComponent<Text>().color.r, hs2.GetComponent<Text>().color.g, hs2.GetComponent<Text>().color.b, controlMat2.color.a);
 				}
 
@@ -121,7 +132,7 @@ public class MoveForward : MonoBehaviour {
 			float calcVel = 1 + (locRig.velocity.x-0)*(1.5f - 1)/(4-1); //map range
 
 			if (calcVel > 1) {
-				charAnim.speed = calcVel;
+				charAnim.speed = calcVel * animSpeedMultiplier;
 				//Debug.Log ("rigidbody vel = " + charAnim.speed);
 			} else {
 				charAnim.speed = 1;
