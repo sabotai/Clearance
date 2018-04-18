@@ -55,7 +55,7 @@ public class Reset : MonoBehaviour {
 		}
 
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Return)) {
 
 			SceneManager.LoadScene (0);
 			//Application.LoadLevel (Application.loadedLevelName);
